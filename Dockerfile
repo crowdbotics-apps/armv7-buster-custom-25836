@@ -10,5 +10,5 @@ RUN apt-get install -y -q python-dev python3-dev python3-venv python3-setuptools
     build-essential \
     libjpeg-dev zlib1g-dev \
     libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev libsdl1.2-dev \
-    libsmpeg-dev subversion libportmidi-dev ffmpeg libswscale-dev libavformat-dev libavcodec-dev libfreetype6-dev
-RUN python3 -m venv venv3 && venv3/bin/python -m pip install wheel && venv3/bin/python -m pip install -r /root/requirements.txt
+    libsmpeg-dev subversion libportmidi-dev ffmpeg libswscale-dev libavformat-dev libavcodec-dev libfreetype6-dev libatlas-base-dev gfortran
+RUN python3 -m venv venv3 && venv3/bin/python -m pip install --upgrade pip && venv3/bin/python -m pip install wheel && venv3/bin/python -m pip install -r /root/requirements.txt
