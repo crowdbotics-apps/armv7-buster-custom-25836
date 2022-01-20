@@ -85,4 +85,4 @@ COPY ./requirements.txt /root/requirements.txt
 RUN python3 -m venv venv3
 RUN venv3/bin/python -m pip install -qqq --extra-index-url https://www.piwheels.org/simple -U pip wheel setuptools
 RUN venv3/bin/python -m pip install -qqq --extra-index-url https://www.piwheels.org/simple -r /root/requirements.txt
-RUN venv3/bin/python -m pip install -qqq --extra-index-url https://www.piwheels.org/simple pyinstaller
+RUN venv3/bin/python -m pip install -vvv pyinstaller
