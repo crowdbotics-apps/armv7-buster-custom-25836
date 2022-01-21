@@ -87,7 +87,6 @@ RUN rm -rf /var/lib/apt/lists/* \
     libcmocka0 \
     libcmocka-dev
 COPY ./requirements.txt /root/requirements.txt
-RUN virtualenv -p /usr/bin/python3 vpy3 \
-    && . /vpy3/bin/activate \
+RUN python3 -m venv vpy3 \
     && /vpy3/bin/pip install --extra-index-url https://www.piwheels.org/simple -qqqU pip wheel setuptools \
     && /vpy3/bin/pip install --extra-index-url https://www.piwheels.org/simple -qqqr /root/requirements.txt
