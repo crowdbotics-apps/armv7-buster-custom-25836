@@ -1,10 +1,11 @@
 FROM arm32v7/debian:buster
 
-RUN rm -rf /var/lib/apt/lists/*
-RUN apt-get clean
-RUN apt-get update -o Acquire::CompressionTypes::Order::=gz
-RUN apt-get update && apt-get upgrade
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -mqqy \
+RUN rm -rf /var/lib/apt/lists/* \
+    && apt-get clean \
+    && apt-get update -o Acquire::CompressionTypes::Order::=gz \
+    && apt-get update \
+    && apt-get upgrade \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -qqy \
     python-dev \
     libxml2-dev \
     libxslt-dev \
@@ -75,14 +76,18 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -mqqy \
     git \
     netpbm \
     sudo \
+    tcl8.6 \
     tcl8.6-dev \
+    tk8.6 \
     tk8.6-dev \
     virtualenv \
     wget \
     xvfb \
-    zlib1g-dev
+    zlib1g-dev \
+    libcmocka0 \
+    libcmocka-dev
 COPY ./requirements.txt /root/requirements.txt
-RUN python3 -m venv venv3
-RUN venv3/bin/python -m pip install -qqq --extra-index-url https://www.piwheels.org/simple -U pip wheel setuptools
-RUN venv3/bin/python -m pip install -qqq --extra-index-url https://www.piwheels.org/simple -r /root/requirements.txt
-RUN venv3/bin/python -m pip install -vvv pyinstaller
+RUN virtualenv -p /usr/bin/python3 vpy3 \
+    && . /vpy3/bin/activate \
+    && /vpy3/bin/pip install --extra-index-url https://www.piwheels.org/simple -qqqU pip wheel setuptools \
+    && /vpy3/bin/pip install --extra-index-url https://www.piwheels.org/simple -qqqr /root/requirements.txt
